@@ -20,5 +20,6 @@ public class Employee {
     private String employeeFirstName;
     private String employeeLastName;
     private String employeeMail;
+    private String departmentCode;
 
 }

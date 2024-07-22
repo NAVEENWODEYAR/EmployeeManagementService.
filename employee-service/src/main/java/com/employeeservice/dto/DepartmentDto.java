@@ -11,12 +11,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class EmployeeDto {
+public class DepartmentDto {
 
-    private Long employeeId;
-    private String employeeFirstName;
-    private String employeeLastName;
-    private String employeeMail;
+    private Long departmentId;
+    private String departmentName;
+    private String departmentDescription;
     private String departmentCode;
-
 }
