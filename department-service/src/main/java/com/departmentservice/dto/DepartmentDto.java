@@ -1,6 +1,6 @@
-package com.employee.departmentservice.dto;
+package com.departmentservice.dto;
 
-import com.employee.departmentservice.entity.Department;
+import com.departmentservice.entity.Department;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

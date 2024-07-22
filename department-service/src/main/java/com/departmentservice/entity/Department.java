@@ -1,6 +1,6 @@
-package com.employee.departmentservice.entity;
+package com.departmentservice.entity;
 
-import com.employee.departmentservice.dto.DepartmentDto;
+import com.departmentservice.dto.DepartmentDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

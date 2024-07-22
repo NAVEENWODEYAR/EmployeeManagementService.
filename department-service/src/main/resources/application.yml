@@ -4,12 +4,16 @@ server:
 
 spring:
   application:
-    name: employeeService
+    name: department-service
 
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        use_sql_comments: true
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
 
@@ -17,7 +21,7 @@ spring:
     url: jdbc:mysql://localhost:3306/departmentDb?createDatabaseIfNotExist=true
     username: root
     password: boss
-    driverClassName: com.mysql.cj.jdbc.Driver
+    driver-class-name: com.mysql.cj.jdbc.Driver
 
   data:
     jpa:

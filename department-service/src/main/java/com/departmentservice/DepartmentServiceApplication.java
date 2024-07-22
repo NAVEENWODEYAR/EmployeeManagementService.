@@ -1,14 +1,14 @@
-package com.employee.employeeservice;
+package com.departmentservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class EmployeeServiceApplication {
+public class DepartmentServiceApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(EmployeeServiceApplication.class, args);
-		System.out.println("EMPLOYEE\nSERVICE");
+		SpringApplication.run(DepartmentServiceApplication.class, args);
+		System.out.println("DEPARTMENT\nSERVICE");
 	}
 
 }

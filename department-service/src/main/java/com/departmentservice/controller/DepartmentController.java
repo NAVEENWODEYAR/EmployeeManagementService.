@@ -1,16 +1,13 @@
-package com.employee.departmentservice.controller;
+package com.departmentservice.controller;
 
-import com.employee.departmentservice.dto.DepartmentDto;
-import com.employee.departmentservice.service.DepartmentService;
+import com.departmentservice.dto.DepartmentDto;
+import com.departmentservice.service.DepartmentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 @RequestMapping("/api/department")
@@ -18,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Slf4j
 public class DepartmentController {
 
-    private DepartmentService departmentService;
+    private final DepartmentService departmentService;
 
     @GetMapping("/test")
     public ResponseEntity<?> testEndpoint(){
@@ -30,6 +27,13 @@ public class DepartmentController {
 
     @PostMapping
     public ResponseEntity<Object> addDepartment(@RequestBody DepartmentDto request){
+        log.info("adding new department");
         return new ResponseEntity(departmentService.saveDepartment(request),HttpStatus.CREATED);
+    }
+
+    @GetMapping("/{departmentCode}")
+    public ResponseEntity<DepartmentDto> getDepartment(@PathVariable String departmentCode){
+        log.info("Department found", departmentCode);
+        return new ResponseEntity(departmentService.findByDepartmentCode(departmentCode),HttpStatus.FOUND);
     }
 }
