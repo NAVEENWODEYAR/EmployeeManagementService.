@@ -33,3 +33,9 @@ logging:
     root: INFO
     org.springframework.web: DEBUG
     com.employee.departmentservice: TRACE
+
+eureka:
+  instance:
+    client:
+      serverUrl:
+        defaultZone: http://localhost:8761/eureka/
