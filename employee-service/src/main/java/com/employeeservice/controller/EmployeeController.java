@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.reactive.function.client.WebClient;
 
 @Controller
 @RequestMapping("/api/employee")
@@ -32,10 +33,27 @@ public class EmployeeController {
         return new ResponseEntity(employeeService.saveEmployee(request),HttpStatus.CREATED);
     }
 
+    // restTemplate,
     @GetMapping("/{employeeID}")
     public ResponseEntity<APIResponseDto> getEmployeeById(@PathVariable Long employeeID){
         log.debug("getEmployeeById",employeeID);
         var apiResponse = employeeService.getById(employeeID);
+        return new ResponseEntity(apiResponse,HttpStatus.FOUND);
+    }
+
+    // webClient,
+    @GetMapping("/getEmp/{employeeID}")
+    public ResponseEntity<APIResponseDto> getEmpById(@PathVariable Long employeeID){
+        log.debug("getEmployeeById",employeeID);
+        var apiResponse = employeeService.getByEmpId(employeeID);
+        return new ResponseEntity(apiResponse,HttpStatus.FOUND);
+    }
+
+    // openFeign,
+    @GetMapping("/getEmployee/{employeeID}")
+    public ResponseEntity<APIResponseDto> getEmployeById(@PathVariable Long employeeID){
+        log.debug("getEmployeeById",employeeID);
+        var apiResponse = employeeService.getByEmployeeId(employeeID);
         return new ResponseEntity(apiResponse,HttpStatus.FOUND);
     }
 }
