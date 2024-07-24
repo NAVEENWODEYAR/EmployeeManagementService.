@@ -10,6 +10,7 @@ import com.employeeservice.service.EmployeeService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -78,8 +79,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         log.debug("Using OpenFeign Client");
 
         var employee = employeeRepository.findById(employeeID).get();
-
-        var departmentDto = apiClient.getDepartment(employee.getDepartmentCode());
+        var departmentCode = employee.getDepartmentCode();
+        log.info(departmentCode);
+        var departmentDto = apiClient.getDepartment(departmentCode);
 
         var employeeDto = modelMapper.map(employee, EmployeeDto.class);
 
