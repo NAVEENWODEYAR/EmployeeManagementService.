@@ -7,6 +7,7 @@ import com.employeeservice.entity.Employee;
 import com.employeeservice.repository.EmployeeRepository;
 import com.employeeservice.service.APIClient;
 import com.employeeservice.service.EmployeeService;
+import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -17,7 +18,8 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Service
 @Slf4j
-@RequiredArgsConstructor
+//@RequiredArgsConstructor
+@AllArgsConstructor
 public class EmployeeServiceImpl implements EmployeeService {
 
     private final EmployeeRepository employeeRepository;
@@ -78,10 +80,9 @@ public class EmployeeServiceImpl implements EmployeeService {
         log.debug("Using OpenFeign Client");
 
         var employee = employeeRepository.findById(employeeID).get();
-
-        var departmentDto = apiClient.getDepartment(employee.getDepartmentCode());
-
         var employeeDto = modelMapper.map(employee, EmployeeDto.class);
+        var departmentCode = employee.getDepartmentCode();
+        var departmentDto = apiClient.getDepartment(departmentCode);
 
         APIResponseDto apiResponseDto = new APIResponseDto();
                         apiResponseDto.setEmployee(employeeDto);

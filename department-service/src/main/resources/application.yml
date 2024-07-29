@@ -1,10 +1,10 @@
 
 server:
-  port: 7070
+  port: 5454
 
 spring:
   application:
-    name: department-service
+    name: DEPARTMENT-SERVICE
 
   jpa:
     hibernate:
