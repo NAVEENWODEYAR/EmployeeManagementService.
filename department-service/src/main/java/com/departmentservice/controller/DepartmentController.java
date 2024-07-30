@@ -17,12 +17,18 @@ public class DepartmentController {
 
     private final DepartmentService departmentService;
 
+//    @GetMapping("/test")
+//    public ResponseEntity<?> testEndpoint(){
+//        log.warn("Test endpoint accessed");
+//        return ResponseEntity.status(HttpStatus.FOUND)
+//                .header("Department", "microService-1")
+//                .body("Welcome to the Department\nService");
+//    }
+
     @GetMapping("/test")
     public ResponseEntity<?> testEndpoint(){
         log.warn("Test endpoint accessed");
-        return ResponseEntity.status(HttpStatus.FOUND)
-                .header("Department", "microService-1")
-                .body("Welcome to the Department\nService");
+        return ResponseEntity.ok("TEST");
     }
 
     @PostMapping
@@ -31,9 +37,14 @@ public class DepartmentController {
         return new ResponseEntity(departmentService.saveDepartment(request),HttpStatus.CREATED);
     }
 
-    @GetMapping("/{departmentCode}")
+    @GetMapping("getByDeptCode/{departmentCode}")
     public ResponseEntity<DepartmentDto> getDepartment(@PathVariable String departmentCode){
         log.info("Department found", departmentCode);
-        return new ResponseEntity(departmentService.findByDepartmentCode(departmentCode),HttpStatus.FOUND);
+        return new ResponseEntity<>(departmentService.findByDepartmentCode(departmentCode),HttpStatus.FOUND);
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<?> getDepartmentList(){
+        return new ResponseEntity<>(departmentService.getDepartmentList(),HttpStatus.FOUND);
     }
 }

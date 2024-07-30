@@ -9,9 +9,11 @@ public interface EmployeeService {
 
     EmployeeDto saveEmployee(EmployeeDto employeeDto);
 
-    APIResponseDto getById(Long employeeID);
-
-    APIResponseDto getByEmpId(Long employeeID);
+//    APIResponseDto getById(Long employeeID);
+//
+//    APIResponseDto getByEmpId(Long employeeID);
 
     APIResponseDto getByEmployeeId(Long employeeID);
+
+    String test();
 }

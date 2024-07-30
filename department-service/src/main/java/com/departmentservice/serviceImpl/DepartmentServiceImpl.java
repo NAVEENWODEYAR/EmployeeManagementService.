@@ -30,4 +30,9 @@ public class DepartmentServiceImpl implements DepartmentService {
         DepartmentDto departmentDto = new DepartmentDto(department);
         return departmentDto;
     }
+
+    @Override
+    public Object getDepartmentList() {
+        return departmentRepository.findAll();
+    }
 }

@@ -34,20 +34,20 @@ public class EmployeeController {
     }
 
     // restTemplate,
-    @GetMapping("/{employeeID}")
-    public ResponseEntity<APIResponseDto> getEmployeeById(@PathVariable Long employeeID){
-        log.debug("getEmployeeById",employeeID);
-        var apiResponse = employeeService.getById(employeeID);
-        return new ResponseEntity(apiResponse,HttpStatus.FOUND);
-    }
-
-    // webClient,
-    @GetMapping("/getEmp/{employeeID}")
-    public ResponseEntity<APIResponseDto> getEmpById(@PathVariable Long employeeID){
-        log.debug("getEmployeeById",employeeID);
-        var apiResponse = employeeService.getByEmpId(employeeID);
-        return new ResponseEntity(apiResponse,HttpStatus.FOUND);
-    }
+//    @GetMapping("/{employeeID}")
+//    public ResponseEntity<APIResponseDto> getEmployeeById(@PathVariable Long employeeID){
+//        log.debug("getEmployeeById",employeeID);
+//        var apiResponse = employeeService.getById(employeeID);
+//        return new ResponseEntity(apiResponse,HttpStatus.FOUND);
+//    }
+//
+//    // webClient,
+//    @GetMapping("/getEmp/{employeeID}")
+//    public ResponseEntity<APIResponseDto> getEmpById(@PathVariable Long employeeID){
+//        log.debug("getEmployeeById",employeeID);
+//        var apiResponse = employeeService.getByEmpId(employeeID);
+//        return new ResponseEntity(apiResponse,HttpStatus.FOUND);
+//    }
 
     // openFeign,
     @GetMapping("/getEmployee/{employeeID}")
@@ -55,5 +55,12 @@ public class EmployeeController {
         log.debug("getEmployeeById",employeeID);
         var apiResponse = employeeService.getByEmployeeId(employeeID);
         return new ResponseEntity(apiResponse,HttpStatus.FOUND);
+    }
+
+    @GetMapping
+    public ResponseEntity<APIResponseDto> getEmployeByIdTest(){
+        log.debug("getEmployeeByIdTest");
+        employeeService.test();
+        return new ResponseEntity(employeeService.test(),HttpStatus.FOUND);
     }
 }

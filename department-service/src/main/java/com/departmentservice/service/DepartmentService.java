@@ -9,4 +9,6 @@ public interface DepartmentService {
     DepartmentDto saveDepartment(DepartmentDto departmentDto);
 
     DepartmentDto findByDepartmentCode(String departmentCode);
+
+    Object getDepartmentList();
 }
