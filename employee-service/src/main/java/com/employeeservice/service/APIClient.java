@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 //@FeignClient(name = "DEPARTMENT-SERVICE")
 public interface APIClient {
 
-    @GetMapping("/api/department/{deptCode}")
-    DepartmentDto getDepartment(@PathVariable String deptCode);
+    @GetMapping("/api/department/{departmentCode}")
+    DepartmentDto getDepartment(@PathVariable("departmentCode") String departmentCode);
 
 }

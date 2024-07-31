@@ -7,6 +7,7 @@ import com.employeeservice.entity.Employee;
 import com.employeeservice.repository.EmployeeRepository;
 import com.employeeservice.service.APIClient;
 import com.employeeservice.service.EmployeeService;
+import feign.FeignException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
@@ -14,6 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.reactive.function.client.WebClient;
+
+import java.util.List;
+import java.util.Optional;
 
 
 @Service
@@ -50,8 +54,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         var employeeDto = modelMapper.map(employee, EmployeeDto.class);
 
         APIResponseDto apiResponseDto = new APIResponseDto();
-                        apiResponseDto.setEmployee(employeeDto);
-                        apiResponseDto.setDepartment(departmentDto);
+        apiResponseDto.setEmployee(employeeDto);
+        apiResponseDto.setDepartment(departmentDto);
         return apiResponseDto;
     }
 
@@ -68,8 +72,8 @@ public class EmployeeServiceImpl implements EmployeeService {
         var employeeDto = modelMapper.map(employee, EmployeeDto.class);
 
         APIResponseDto apiResponseDto = new APIResponseDto();
-                        apiResponseDto.setEmployee(employeeDto);
-                        apiResponseDto.setDepartment(departmentDto);
+        apiResponseDto.setEmployee(employeeDto);
+        apiResponseDto.setDepartment(departmentDto);
 
         return apiResponseDto;
     }
@@ -81,14 +85,25 @@ public class EmployeeServiceImpl implements EmployeeService {
         var employee = employeeRepository.findById(employeeID).get();
         var departmentCode = employee.getDepartmentCode();
         log.info(departmentCode);
-        var departmentDto = apiClient.getDepartment(departmentCode);
+        log.info(String.valueOf(apiClient.hashCode()));
+        log.info(apiClient.toString());
+        DepartmentDto departmentDto = null;
+        try {
+            departmentDto = apiClient.getDepartment(departmentCode);
+        } catch (FeignException e) {
+            if (e.status() == 302) {
+                throw new RuntimeException("Redirects are not supported. Please check the service configuration.");
+            } else {
+                    throw e;
+                }
+            }
 
-        var employeeDto = modelMapper.map(employee, EmployeeDto.class);
+            var employeeDto = modelMapper.map(employee, EmployeeDto.class);
 
-        APIResponseDto apiResponseDto = new APIResponseDto();
-                        apiResponseDto.setEmployee(employeeDto);
-                        apiResponseDto.setDepartment(departmentDto);
+            APIResponseDto apiResponseDto = new APIResponseDto();
+            apiResponseDto.setEmployee(employeeDto);
+            apiResponseDto.setDepartment(departmentDto);
 
-        return apiResponseDto;
-    }
+            return apiResponseDto;
+        }
 }
