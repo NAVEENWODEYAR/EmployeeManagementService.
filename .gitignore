@@ -36,3 +36,5 @@ build/
 *.class
 *.metadata/
 *.metadata
+*.idea/compiler.xml
+*.idea/
