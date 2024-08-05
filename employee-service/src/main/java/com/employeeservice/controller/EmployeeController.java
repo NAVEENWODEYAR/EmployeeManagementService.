@@ -29,31 +29,31 @@ public class EmployeeController {
 
     @PostMapping
     public ResponseEntity<EmployeeDto> saveEmployee(@RequestBody EmployeeDto request){
-        log.info("Saving employee",request.getEmployeeFirstName());
-        return new ResponseEntity(employeeService.saveEmployee(request),HttpStatus.CREATED);
+        log.info("adding employee {}",request.getEmployeeFirstName());
+        return new ResponseEntity<>(employeeService.saveEmployee(request),HttpStatus.CREATED);
     }
 
     // restTemplate,
     @GetMapping("/{employeeID}")
     public ResponseEntity<APIResponseDto> getEmployeeById(@PathVariable Long employeeID){
-        log.debug("getEmployeeById",employeeID);
+        log.debug("getEmployeeById {}",employeeID);
         var apiResponse = employeeService.getById(employeeID);
-        return new ResponseEntity(apiResponse,HttpStatus.FOUND);
+        return new ResponseEntity<>(apiResponse,HttpStatus.FOUND);
     }
 
     // webClient,
     @GetMapping("/getEmp/{employeeID}")
     public ResponseEntity<APIResponseDto> getEmpById(@PathVariable Long employeeID){
-        log.debug("getEmployeeById",employeeID);
+        log.debug("getEmployeeById {}",employeeID);
         var apiResponse = employeeService.getByEmpId(employeeID);
-        return new ResponseEntity(apiResponse,HttpStatus.FOUND);
+        return new ResponseEntity<>(apiResponse,HttpStatus.FOUND);
     }
 
     // openFeign,
     @GetMapping("/getEmployee/{employeeID}")
     public ResponseEntity<APIResponseDto> getEmployeById(@PathVariable Long employeeID){
-        log.debug("getEmployeeById",employeeID);
+        log.debug("getEmployeeById {}",employeeID);
         var apiResponse = employeeService.getByEmployeeId(employeeID);
-        return new ResponseEntity(apiResponse,HttpStatus.FOUND);
+        return new ResponseEntity<>(apiResponse,HttpStatus.FOUND);
     }
 }
