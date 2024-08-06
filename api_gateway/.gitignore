@@ -31,10 +31,3 @@ build/
 
 ### VS Code ###
 .vscode/
-
-## ClassFiles ##
-*.class
-*.metadata/
-*.metadata
-*.idea/compiler.xml
-*.idea/
