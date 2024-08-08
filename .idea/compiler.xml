@@ -11,6 +11,11 @@
         <module name="employee-service" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api_gateway" target="17" />
+      <module name="config_server" target="17" />
+      <module name="service-registry" target="17" />
+    </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
